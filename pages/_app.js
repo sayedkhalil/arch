@@ -8,9 +8,7 @@ function MyApp({ Component, pageProps }) {
     <>
     <AuthProvider>
     <AppWrapper>
-<Layout1 >
 <Component {...pageProps} />
-</Layout1>
     </AppWrapper>
     </AuthProvider>
    </>

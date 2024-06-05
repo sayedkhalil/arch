@@ -15,11 +15,14 @@ import Component1 from '../layout/component1'
 import Component2 from '../layout/component2'
 import Component3 from '../layout/component3'
 import AuthRoute from '../authrout'
+import Layout1 from '../layout/Layout1'
 
 export default function Home({getdata}) {
   return (
     <AuthRoute>
+      <Layout1 >
     <div className="ccc0n">
+    
       <Head>
         <title>{getdata.getinfo.name}</title>
         <meta name="description" content={getdata.getinfo.des} />
@@ -36,6 +39,8 @@ export default function Home({getdata}) {
         
          
     </div>
+    </Layout1>
+
     </AuthRoute>
   )
 }

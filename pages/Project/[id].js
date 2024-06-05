@@ -6,6 +6,7 @@ import { collection, addDoc ,getDocs,doc,Timestamp,deleteDoc , setDoc,getDoc, qu
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { Chart } from "chart.js";
+import Link from "next/link";
 import Image from 'next/image'
 import { useRouter } from "next/router";
 import { useAppContext } from "../../AppContext";
@@ -154,7 +155,17 @@ useEffect(() => {
    <link rel="icon" href="" type="image/x-icon" />
 
  </Head>
- 
+ <nav className="navbar navbar-light ">
+  <div className="container">
+  
+<Link className="mt-5" href={`/`}>
+    <a className="navbar-brand mt-5" href="/">
+      <img src="l1.png"alt="" width="300" height="70" className="d-inline-block align-text-top"/>
+    </a>
+    </Link>
+
+  </div>
+</nav>
 <div className="w-100 my-5 lin-it">
 <img className="w-100" src={a.covers.imges} alt="" />
 <p className="sd text-light h1">{a.project}</p>
