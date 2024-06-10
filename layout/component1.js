@@ -38,12 +38,12 @@ const Component1 = () => {
                                                                            (accumulator, currentValue) => accumulator + currentValue,
                                                                                             0,
                                                                                 ); 
-        const ww =data.b.map(x=>x.Actual_ratio)
-        const weight = ww.reduce(
+        const ww =data.b.map(x=>x.Actual_ratio*x.Weight)
+        const aweight = ww.reduce(
                      (accumulator, currentValue) => accumulator + currentValue,
                                                 0,
                                           )
-        const aweight = weight/ww.length
+        
         const ch =data.b.filter(x=>x.Expiry_date_change!=0)                                                         
        return (  
         <div className=" row  ccc0n mt-5">
@@ -53,52 +53,52 @@ const Component1 = () => {
         </Head>
 <div className="ccc0n  row">
         <div className="col-6 col-lg-2 p-2 ">
-        <p className="text-center h3 fs-3 mt-1 ">{data.a.length}</p>
-        <p className="text-center fs-6 p-1 text-light bg-dark ">عدد المشاريع <i class="fas fa-place-of-worship ms-5"></i></p>
+        <p className="text-center haa h3 fs-3 mt-1 ">{data.a.length}</p>
+        <p className="text-center fs1 box p-1 text-light ha1 box ">عدد المشاريع <i class="fas fa-place-of-worship ms-3"></i></p>
         </div>
         <div className="col-6 col-lg-2 p-2 ">
         <p className="text-center h3 fs-3 mt-1 ">{com.length}</p>
-        <p className="text-center fs-6 p-1 text-light  bg-info">المشاريع المكتملة<i class="fas fa-place-of-worship ms-5"></i></p>
+        <p className="text-center fs1 box p-1 text-light  ha3">المشاريع المكتملة<i class="fas fa-place-of-worship ms-3"></i></p>
         </div>   
         <div className="col-6 col-lg-2 p-2 ">
-        <p className="text-center h3 fs-3 mt-1 ">{suc.length}</p>
-        <p className="text-center fs-6 p-1 text-light bg-success ">مشاريع على المسار<i class="fas fa-place-of-worship ms-5"></i></p>
+        <p className="text-center h3 fs-3 haaa1 mt-1 ">{suc.length}</p>
+        <p className="text-center fs1  box p-1 text-light ha2 ">مشاريع على المسار<i class="fas fa-place-of-worship ms-3"></i></p>
         </div> 
         <div className="col-6 col-lg-2 p-2 ">
-        <p className="text-center h3 fs-3 mt-1 ">{re.length}</p>
-        <p className="text-center fs-6 p-1 text-dark bg-warning ">مشاريع متأخرة جزئيا<i class="fas fa-place-of-worship ms-5"></i></p>
+        <p className="text-center h3 fs-3 haaa2 mt-1 ">{re.length}</p>
+        <p className="text-center fs1 box p-1 text-dark ha4 ">مشاريع متأخرة جزئيا<i class="fas fa-place-of-worship ms-3"></i></p>
         </div>
         <div className="col-6 col-lg-2 p-2 ">
-        <p className="text-center h3 fs-3 mt-1 ">{rel.length}</p>
-        <p className="text-center fs-6 p-1 text-light bg-danger ">مشاريع متأخرة <i class="fas fa-place-of-worship ms-5"></i></p>
+        <p className="text-center h3 fs-3 haaa3 mt-1 ">{rel.length}</p>
+        <p className="text-center fs1 box p-1 text-light ha6 ">مشاريع متأخرة <i class="fas fa-place-of-worship ms-3"></i></p>
         </div>
         <div className="col-6 col-lg-2 p-2 ">
         <p className="text-center h3 fs-3 mt-1 ">{`%${Math.floor(aweight*100)}`}</p>
-        <p className="text-center fs-6 p-1 text-light bg-primary ">حالة المشاريع <i class="fas fa-tachometer-alt ms-5"></i></p>
+        <p className="text-center box  fs1 p-1 text-light ha5 ">حالة المشاريع <i class="fas fa-tachometer-alt ms-3"></i></p>
         </div>
-        <div className="col-6 col-lg-2 p-2 ">
-        <p className="text-center h3 fs-3 mt-1 ">{total.toLocaleString()}</p>
-        <p className="text-center fs-6 p-1 text-dark bgcard ">قيمة المشاريع <i class="fas fa-money-bill-wave ms-5 text-light"></i></p>
+        <div className="col-6 col-lg-2 p-2 bgsd ">
+        <p className="text-center  h3 fs-3 mt-1 ">{total.toLocaleString()}</p>
+        <p className="text-center fs1  p-1 text-dark bgcard ">قيمة المشاريع <i class="fas fa-money-bill-wave ms-3 text-light"></i></p>
         </div>    
-        <div className="col-6 col-lg-2 p-2 ">
+        <div className="col-6 col-lg-2 p-2 bgsd">
         <p className="text-center h3 fs-3 mt-1 ">{released_total .toLocaleString()}</p>
-        <p className="text-center fs-6 p-1 text-dark bgcard ">المنصرف<i class="fas fa-money-bill-wave ms-5 text-light"></i></p>
+        <p className="text-center fs1  p-1 text-dark bgcard ">المنصرف<i class="fas fa-money-bill-wave ms-3 text-light"></i></p>
         </div>
-        <div className="col-6 col-lg-2 p-2 ">
+        <div className="col-6 col-lg-2 p-2 bgsd">
         <p className="text-center h3 fs-3 mt-1 ">{s .toLocaleString()}</p>
-        <p className="text-center fs-6 p-1 text-dark bgcard ">المتبقي<i class="fas fa-money-bill-wave ms-5 text-light"></i></p>
+        <p className="text-center fs1  p-1 text-dark bgcard ">المتبقي<i class="fas fa-money-bill-wave ms-3 text-light"></i></p>
         </div>   
-        <div className="col-6 col-lg-2 p-2 ">
+        <div className="col-6 col-lg-2 p-2 bgsd">
         <p className="text-center h3 fs-3 mt-1 ">{Uploaded_extracts}</p>
-        <p className="text-center fs-6 p-1 text-dark bgcard "> المستخلصات المرفوعة<i class="fas fa-money-bill-wave ms-5 text-light"></i></p>
+        <p className="text-center fs1  p-1 text-dark bgcard "> مستخلصات مرفوعة<i class="fas fa-money-bill-wave ms-3 text-light"></i></p>
         </div> 
-        <div className="col-6 col-lg-2 p-2 ">
+        <div className="col-6 col-lg-2 p-2 bgsd">
         <p className="text-center h3 fs-3 mt-1 ">{noReleased_extracts}</p>
-        <p className="text-center fs-6 p-1 text-dark bgcard ">مستخلصات لم تصرف<i class="fas fa-money-bill-wave ms-5 text-light"></i></p>
+        <p className="text-center fs1  p-1 text-dark bgcard ">مستخلصات لم تصرف<i class="fas fa-money-bill-wave ms-3 text-light"></i></p>
         </div>
-        <div className="col-6 col-lg-2 p-2 ">
+        <div className="col-6 col-lg-2 p-2 bgsd">
         <p className="text-center h3 fs-3 mt-1 ">{ch.length}</p>
-        <p className="text-center fs-6 p-1 text-dark bgcard ">أوامر التغيير <i class="fas fa-exchange-alt ms-5 text-light"></i></p>
+        <p className="text-center fs1  p-1 text-dark bgcard ">أوامر التغيير <i class="fas fa-exchange-alt ms-3 text-light"></i></p>
         </div>    
 </div>
 </div>

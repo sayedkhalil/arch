@@ -209,7 +209,7 @@ const onjopsec = (e) => setjop({...jop,sec:e.target.value})
                         () => {
                             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                             setProgressd4(0);
-                            setdocs({...docs,imges:downloadURL})
+                            setdocs({...docs,doc4:downloadURL})
                             });
                         }
                       );}else{alert("أقصى عدد للصور 12 صور")}}
@@ -586,15 +586,15 @@ crossOrigin="anonymous">
   <li className="nav-item" role="presentation">
     <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contac" type="button" role="tab" aria-controls="contact" aria-selected="false">معالم المشروع</button>
   </li>
-  <li className="nav-item" role="presentation">
+  {/* <li className="nav-item" role="presentation">
     <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#conta" type="button" role="tab" aria-controls="contact" aria-selected="false">تعديل معلومات الصفحة</button>
-  </li>
+  </li> */}
 
 </ul>
 <div className="tab-content" id="myTabContent">
    {/*----------------------------------------------------------------------------- وظيفة---------------------------------------------------------------------------------------  */}
 
-  <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+  <div className="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
   <form onSubmit={addnews}> 
   <div className="input-group input-group-lg border-success my-3 w-75 ms-auto required">
   <select class="form-select w-100 p-1 " aria-label="Default select example" onChange={onnewcode}>
@@ -624,7 +624,7 @@ crossOrigin="anonymous">
 </form>
 </div>
 {/* .................................................................................................................................................... */}
-  <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
   <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
   <form onSubmit={addcov}> 
   <div className="input-group input-group-lg border-success my-3 w-75 ms-auto required">
@@ -657,7 +657,7 @@ crossOrigin="anonymous">
   </div>
   </div>
   {/* --------------------------------------------------------------------------------------------------------------  الأقسام--------------------------------- */}
-  <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+  <div className="tab-pane fade  " id="contact" role="tabpanel" aria-labelledby="contact-tab">
   <form onSubmit={addDoc}> 
   <div className="input-group input-group-lg border-success my-3 w-75 ms-auto required">
   <select class="form-select w-100 p-1 " aria-label="Default select example" onChange={ondoc}>

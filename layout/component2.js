@@ -8,13 +8,14 @@ import { Chart } from "chart.js";
 import Link from "next/link";
 import { useEffect } from "react"
 import { Data } from "../json/data";
-import { CircularGaugeComponent, AxesDirective, AxisDirective, PointersDirective, PointerDirective } from '@syncfusion/ej2-react-circulargauge';
+import Gauge from "./gauge";
+import Layout1 from "./Layout1";
 const Component2 = () => {
   const [data,setdata]=useState(Data)
   const [list,setlist]=useState(Data.a)
 
-  const ww =data.b.map(x=>x.Actual_ratio)
-  const weight = ww.reduce(
+  const ww =data.b.map(x=>x.Actual_ratio*x.Weight)
+  const aweight = ww.reduce(
                (accumulator, currentValue) => accumulator + currentValue,
                                           0,
                                     )
@@ -28,34 +29,99 @@ const released_total = rr.reduce(
 (accumulator, currentValue) => accumulator + currentValue,
   0,
  );    
-  const aweight = weight/ww.length
-  let date = new Date();
+
+ let date = new Date();
 const dsa = data.b.map(x=>Math.floor((Math.abs(new Date( x.Expiry_date).getTime()-date.getTime()))/(1000 * 60 * 60 * 24)))
 const daa = data.a.map(x=>Math.floor((Math.abs(date.getTime()-new Date( x.date_start).getTime()))/(1000 * 60 * 60 * 24)))
     useEffect(() => {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.b.map(x=>x.project),
-                datasets: [{
-                    data: data.b.map(x=>x.Planned_ratio),
-                    label: "مخطط",
-                    borderColor: "rgb(109, 253, 181)",
-                    backgroundColor: "rgb(109, 253, 181,0.5)",
-                    borderWidth: 2
-                }, {
-                    data: data.b.map(x=>x.Actual_ratio),
-                    label: "فعلي",
-                    borderColor: "rgb(255, 99, 132)",
-                    backgroundColor: "rgb(255, 99, 132,0.5)",
-                    borderWidth: 2
-                }
-                ]
+        
+        // ------------------------------------------------------------------------------------------------------------
+        const config = {
+          type: "bar",
+          data: {
+            labels: data.b.map(x=>x.project),
+
+            datasets: [
+              {
+                data: data.b.map(x=>x.Planned_ratio),
+                label: "مخطط",
+                borderColor: "rgb(109, 253, 181)",
+                backgroundColor: "#77B7B7",
+                borderWidth: 0
+            }, {
+                data: data.b.map(x=>x.Actual_ratio),
+                label: "فعلي",
+                borderColor: "rgb(255, 99, 132)",
+                backgroundColor: "#BE3A45",
+                borderWidth: 0
+            }
+            ],
+          },
+          options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            title: {
+              display: false,
+              text: "Orders Chart",
             },
-            
-        });
-    }, [])
+            tooltips: {
+              mode: "index",
+              intersect: true,
+            },
+            hover: {
+              mode: "nearest",
+              intersect: true,
+            },
+            legend: {
+              labels: {
+                fontColor: "rgba(0,0,0,.4)",
+              },
+              align: "end",
+              position: "bottom",
+            },
+            scales: {
+              xAxes: [
+                {
+                  display: false,
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Month",
+                  },
+                  gridLines: {
+                    borderDash: [2],
+                    borderDashOffset: [2],
+                    color: "rgba(33, 37, 41, 0.3)",
+                    zeroLineColor: "rgba(33, 37, 41, 0.3)",
+                    zeroLineBorderDash: [2],
+                    zeroLineBorderDashOffset: [2],
+                  },
+                },
+              ],
+              yAxes: [
+                {
+                  display: true,
+                  scaleLabel: {
+                    display: false,
+                    labelString: "Value",
+                  },
+                  gridLines: {
+                    borderDash: [2],
+                    drawBorder: false,
+                    borderDashOffset: [2],
+                    color: "rgba(33, 37, 41, 0.2)",
+                    zeroLineColor: "rgba(33, 37, 41, 0.15)",
+                    zeroLineBorderDash: [2],
+                    zeroLineBorderDashOffset: [2],
+                  },
+                },
+              ],
+            },
+          },
+        };
+        
+        let ctx = document.getElementById("bar-chart").getContext("2d");
+        window.myBar = new Chart(ctx, config);
+        }, [])
     useEffect(() => {
         var ctx = document.getElementById('myChart1').getContext('2d');
         var myChart1 = new Chart(ctx, {
@@ -70,11 +136,11 @@ const daa = data.a.map(x=>Math.floor((Math.abs(date.getTime()-new Date( x.date_s
                         "rgb(255, 99, 132)",
                     ],
                     backgroundColor: [
-                        "rgb(75, 192, 192 )",
+                        "#77B7B7",
                       
-                        "rgb(255, 99, 132)",
+                       "#BE3A45",
                     ],
-                    borderWidth: 2,
+                    borderWidth: 0,
                 }]
             },
             options: {
@@ -91,37 +157,93 @@ const daa = data.a.map(x=>Math.floor((Math.abs(date.getTime()-new Date( x.date_s
         });
     }, [])
     useEffect(() => {
-        var ctx = document.getElementById('myChart2').getContext('2d');
-        var myChart2 = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.b.map(x=>x.project),
-                datasets: [{
-                    data: daa,
-                    label: "منقضي",
-                    borderColor: "#3cba9f",
-                    backgroundColor: "#71d1bd",
-                    borderWidth: 2
-                }, {
-                    data: dsa,
-                    label: "متبقي",
-                    borderColor: "#ffa500",
-                    backgroundColor: "#ffc04d",
-                    borderWidth: 2
-                }, 
-                ]
+        
+        // ------------------------------------------------------------------------------------------------------------
+        const config = {
+          type: "bar",
+          data: {
+            labels: data.b.map(x=>x.project),
+
+            datasets: [
+              {
+                data: daa,
+                label: "منقضي",
+                borderColor: "#6A2B56",
+                backgroundColor: "#6A2B56",
+                borderWidth: 0
+            }, {
+                data: dsa,
+                label: "متبقي",
+                borderColor: "#ffa500",
+                backgroundColor: "#F89B4B",
+                borderWidth: 0
+            }
+            ],
+          },
+          options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            title: {
+              display: false,
+              text: "Orders Chart",
             },
-            options: {
-                scales: {
-                    xAxes: [{
-                        stacked: true
-                    }],
-                    yAxes: [{
-                        stacked: true
-                    }],
-                }
+            tooltips: {
+              mode: "index",
+              intersect: true,
             },
-        });
+            hover: {
+              mode: "nearest",
+              intersect: true,
+            },
+            legend: {
+              labels: {
+                fontColor: "rgba(0,0,0,.4)",
+              },
+              align: "end",
+              position: "bottom",
+            },
+            scales: {
+              xAxes: [
+                {
+                  display: false,
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Month",
+                  },
+                  gridLines: {
+                    borderDash: [2],
+                    borderDashOffset: [2],
+                    color: "rgba(33, 37, 41, 0.3)",
+                    zeroLineColor: "rgba(33, 37, 41, 0.3)",
+                    zeroLineBorderDash: [2],
+                    zeroLineBorderDashOffset: [2],
+                  },
+                },
+              ],
+              yAxes: [
+                {
+                  display: true,
+                  scaleLabel: {
+                    display: false,
+                    labelString: "Value",
+                  },
+                  gridLines: {
+                    borderDash: [2],
+                    drawBorder: false,
+                    borderDashOffset: [2],
+                    color: "rgba(33, 37, 41, 0.2)",
+                    zeroLineColor: "rgba(33, 37, 41, 0.15)",
+                    zeroLineBorderDash: [2],
+                    zeroLineBorderDashOffset: [2],
+                  },
+                },
+              ],
+            },
+          },
+        };
+        
+        let ctx = document.getElementById("bar-chart1").getContext("2d");
+        window.myBar = new Chart(ctx, config);
     }, [])
     
     const ch =data.b.filter(x=>x.Expiry_date_change!=0)
@@ -163,8 +285,8 @@ crossOrigin="anonymous">
  {/* line chart */}
  <h4 className="w-[110px] mx-auto my-3 text-center text-xl font-semibold capitalize ">نسب الانجاز الفعلية والمخططة</h4>
       <div className="w-[1100px] h-screen flex mx-auto my-auto">
-        <div className='border border-gray-400 pt-0 rounded-xl  w-full h-fit my-auto  shadow-xl'>
-          <canvas id='myChart'></canvas>
+        <div className='p-2'>
+          <canvas id='bar-chart'></canvas>
         </div>
       </div>
       </div>
@@ -172,8 +294,8 @@ crossOrigin="anonymous">
  {/* line chart */}
  <h4 className="w-[110px] mx-auto my-3 text-center text-xl font-semibold capitalize ">المنقضي والمتبقي</h4>
       <div className="w-[1100px] h-screen flex mx-auto my-auto">
-        <div className='border border-gray-400 pt-0 rounded-xl  w-full h-fit my-auto  shadow-xl'>
-          <canvas id='myChart2'></canvas>
+        <div className='p-2'>
+          <canvas id='bar-chart1'></canvas>
         </div>
       </div>
       </div>
@@ -182,23 +304,16 @@ crossOrigin="anonymous">
  {/* line chart */}
  <h4 className="w-[110px] mx-auto my-3 text-center text-xl font-semibold capitalize ">المنصرف والمتبقي</h4>
       <div className="w-[1100px] h-screen flex mx-auto my-auto">
-        <div className='border border-gray-400 pt-0 rounded-xl  w-full h-fit my-auto  shadow-xl'>
+        <div className=''>
           <canvas id='myChart1'></canvas>
         </div>
       </div>
       </div>
-      <div className="col-12 col-lg-6">
+      <div className="col-12 col-lg-6 p-5">
 <h4 className="w-[110px] mx-auto my-3 text-center text-xl font-semibold capitalize ">حالة المشروع</h4>
-  <CircularGaugeComponent >
-    <AxesDirective>
-      <AxisDirective>
-        <PointersDirective>
-          <PointerDirective value={Math.floor(aweight*100)}></PointerDirective>
-        </PointersDirective>
-      </AxisDirective>
-    </AxesDirective>
-  </CircularGaugeComponent>
-            
+<div className="gas p-5">
+<Gauge  data={aweight*100}/>
+</div>          
 </div>
 
 </div>
@@ -206,25 +321,25 @@ crossOrigin="anonymous">
 <i class="fas fa-lg fa-filter w-10"></i>
 
 <select class="form-select w-20 mx-1 " aria-label="Default select example" onChange={onmanger} >
-  <option selected>مدير المشروع </option>
+  <option selected className="fs1">مدير المشروع </option>
   {
     unma.map(x=><option key={x} value={x}>{x}</option>)
   }
   </select>
   <select class="form-select w-20 mx-1 " aria-label="Default select example" onChange={onowner} >
-  <option selected>الإدارة المالكة</option>
+  <option selected className="fs1">الإدارة المالكة</option>
   {
    unow.map(x=><option key={x} value={x}>{x}</option>)
   }
   </select>
   <select class="form-select w-20 mx-1 " aria-label="Default select example" onChange={oncase}>
-  <option selected>حالة المشروع</option>
+  <option selected className="fs1">حالة المشروع</option>
   {
     uncase.map(x=><option key={x} value={x}>{x}</option>)
   }
   </select>
   <select class="form-select w-20 mx-1 " aria-label="Default select example" onChange={oncha}>
-  <option selected>أوامر التغير</option>
+  <option selected className="fs1">أوامر التغير</option>
   
     <option  value={0}>لا يوجد</option>
     <option  value={1}>يوجد</option>

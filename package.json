@@ -8,7 +8,7 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
-    "@syncfusion/ej2-react-circulargauge": "^25.2.3",
+    "@geist-ui/core": "^2.3.8",
     "chart.js": "^2.9.4",
     "firebase": "^9.6.6",
     "gauge": "^5.0.2",

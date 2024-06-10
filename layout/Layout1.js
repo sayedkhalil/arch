@@ -285,7 +285,7 @@ crossOrigin="anonymous"></script>
 </div> */}
 </div>
 <h6 className="card-title text-center text-light">{`الحقوق محفوظة${info.name} © 2024`}</h6>
-<h6 className="card-title text-center text-light">powered by <a  href="http://sayedkhalil.com">sayed khalil</a></h6>
+<h6 className="card-title text-center text-light">powered by <a  href="http://sayedkhalil.com">مركز المشاريع التراثية</a></h6>
 </div>
 </div>
     );
